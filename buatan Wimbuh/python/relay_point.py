@@ -29,15 +29,17 @@ def send_influx(**kwargs):
 			print("some problem in sending DB")
 			print(Exception.with_traceback())
 			pass
-
+prev = time()
 index = 1
 is_purging = False
 def on_message(client, userdata, message):
 	start = time()  
+	print(time()-prev)
 	string_telemetri = str(message.payload.decode("utf-8"))
 	print(string_telemetri)
-	Querying_Job = multiprocessing.Process(target=send_influx, kwargs={"value":string_telemetri})
-	Querying_Job.start()
+	
+	#Querying_Job = multiprocessing.Process(target=send_influx, kwargs={"value":string_telemetri})
+	#Querying_Job.start()
  
 
 def mqtt_end_point():
